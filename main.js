@@ -15,7 +15,7 @@ module.exports = function(template, opts, middleware) {
     if("function" == typeof middleware) {
         middleware = [middleware];
     }
-    this.middleware = middleware;
+    this.middleware = middleware || [];
     this.template = template;
     this.useDefaultTemplate = opts.defaultTemplate;
     for(var i in this.template) {
@@ -64,6 +64,9 @@ function domain(rawDomain, callback) {
 }
 
 function middleware(domain, raw, i, middleware, callback) {
+    if(middleware.length < 1) {
+        callback();
+    }
     function mid() {
         i++;
         if(middleware[i+1] && 'function' == typeof middleware[i+1]) {
