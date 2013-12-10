@@ -38,14 +38,12 @@ function domain(rawDomain, callback) {
         dmn.subdomains = subdomains;
         dmn.name = dom[dom.length-2];
         dmn.original = rawDomain;
+        cnt = cnt-2;
     } else {
         dmn = {};
+        cnt = dom.length
     }
     if(this.template) {
-        cnt = dom.length
-        if(this.useDefaultTemplate) {
-            cnt = cnt-2;
-        }
         for(var i = 0; i < dom.slice(0, cnt).length; i++) {
             if(this.template[i]) {
                 dmn[this.template[i]] = (this.useDefaultTemplate) ? subdomains[i] : dom[i];
