@@ -1,4 +1,4 @@
-module.exports = function(template, opts) {
+module.exports = function(template, opts, middleware) {
     if(!opts) {
         opts = {
             defaultTemplate: true
@@ -12,6 +12,10 @@ module.exports = function(template, opts) {
             template.push(tmpl[i]);
         }
     }
+    if("function" == typeof middleware) {
+        middleware = [middleware];
+    }
+    this.middleware = middleware;
     this.template = template;
     this.useDefaultTemplate = opts.defaultTemplate;
     for(var i in this.template) {
@@ -53,5 +57,13 @@ function domain(rawDomain, callback) {
             }
         }
     }
-    callback(null, dmn);
+    for(var i in this.middleware) {
+        if(this.middleware[i+1] && 'function' == typeof this.middleware[i+1]) {
+            middleware[i](dmn, rawDomain, this.middleware[i+1);
+        } else {
+            middleware[i](dmn, rawDomain, function() {
+                callback(null, dmn);
+            });
+        }
+    }
 }
