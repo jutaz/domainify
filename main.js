@@ -59,9 +59,9 @@ function domain(rawDomain, callback) {
     }
     for(var i in this.middleware) {
         if(this.middleware[i+1] && 'function' == typeof this.middleware[i+1]) {
-            middleware[i](dmn, rawDomain, this.middleware[i+1);
+            this.middleware[i](dmn, rawDomain, this.middleware[i+1]);
         } else {
-            middleware[i](dmn, rawDomain, function() {
+            this.middleware[i](dmn, rawDomain, function() {
                 callback(null, dmn);
             });
         }
