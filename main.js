@@ -38,7 +38,7 @@ function domain(rawDomain, callback) {
         dmn.subdomains = subdomains;
         dmn.name = dom[dom.length-2];
         dmn.original = rawDomain;
-        cnt = cnt-2;
+        cnt = dom.length-2;
         if(this.template.length == subdomains.length-1) {
             dmn.fits = true;
         }
