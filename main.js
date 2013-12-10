@@ -39,6 +39,9 @@ function domain(rawDomain, callback) {
         dmn.name = dom[dom.length-2];
         dmn.original = rawDomain;
         cnt = cnt-2;
+        if(this.template.length == subdomains.length-1) {
+            dmn.fits = true;
+        }
     } else {
         dmn = {};
         cnt = dom.length
@@ -49,9 +52,6 @@ function domain(rawDomain, callback) {
                 dmn[this.template[i]] = (this.useDefaultTemplate) ? subdomains[i] : dom[i];
             }
         }
-    }
-    if(this.useDefaultTemplate && this.template.length == subdomains.length-1) {
-        dmn.fits = true;
     }
     callback(null, dmn);
 }
