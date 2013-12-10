@@ -66,6 +66,7 @@ function domain(rawDomain, callback) {
 function middleware(domain, raw, i, middleware, callback) {
     if(middleware.length < 1) {
         callback();
+        return;
     }
     function mid() {
         i++;
