@@ -1,0 +1,16 @@
+{
+  "name": "domainify",
+  "version": "0.0.1",
+  "description": "Parse domains by given template",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "domain",
+    "parser",
+    "url"
+  ],
+  "author": "Justas Brazauskas",
+  "license": "BSD-2-Clause"
+}
