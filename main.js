@@ -57,13 +57,28 @@ function domain(rawDomain, callback) {
             }
         }
     }
-    for(var i in this.middleware) {
-        if(this.middleware[i+1] && 'function' == typeof this.middleware[i+1]) {
-            this.middleware[i](dmn, rawDomain, this.middleware[i+1]);
+    i = 0;
+    middleware(dmn, rawDomain, i, this.middleware, function() {
+        callback(null, dmn);
+    });
+}
+
+function middleware(domain, raw, i, middleware, callback) {
+    function mid() {
+        i++;
+        if(middleware[i+1] && 'function' == typeof middleware[i+1]) {
+            middleware[i](domain, raw, mid.bind(this));
         } else {
-            this.middleware[i](dmn, rawDomain, function() {
-                callback(null, dmn);
+            middleware[i](domain, raw, function() {
+                callback();
             });
         }
+    };
+    if(middleware[i+1] && 'function' == typeof middleware[i+1]) {
+        middleware[i](domain, raw, mid.bind(this));
+    } else {
+        middleware[i](domain, raw, function() {
+            callback();
+        });
     }
 }
