@@ -8,6 +8,8 @@ Domain name parser for JS. Uses templates and middleware.
 
 ## Examples
 
+Also check [examples](/examples/)
+
 ```js
 var lib = require('domainify');
 var parser = new lib('my.beautiful.domain');
